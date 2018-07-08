@@ -12,7 +12,7 @@ class Account:
         conn = sqlite3.connect('accounts.db')
         c = conn.cursor()
 
-        c.execute('''INSERT INTO accounts VALUES ?''',
+        c.execute('''INSERT INTO accounts VALUES (?, ?, ?)''',
                   (self.username, self.password, self.email))
         # Create the table
 
@@ -23,11 +23,13 @@ class Account:
         conn = sqlite3.connect('accounts.db')
         c = conn.cursor()
 
-        c.execute('''SELECT * FROM accounts WHERE username=?''', (username,))
-        print(c.fetchone())
+        c.execute('''SELECT * FROM accounts WHERE username=(?)''', (username,))
+        res = c.fetchone()
 
         conn.commit()
         conn.close()
+
+        return Account(*res)
 
     def get_username(self):
         return self.username
@@ -67,12 +69,12 @@ class Register(Resource):
         email = args['email']
 
         new_account = Account(username, password, email)
-        print(new_account)
+        new_account.write()
 
 class UserInfo(Resource):
     def get(self, username):
-        print(username)
-        Account.query(username)
+        account = Account.query(username)
+        return account.safe_view()
         
 
 api.add_resource(HelloWorld, '/')
