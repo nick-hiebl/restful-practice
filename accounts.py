@@ -46,15 +46,14 @@ class HelloWorld(Resource):
 
 accounts = []
 
-parser = reqparse.RequestParser()
-parser.add_argument('username')
-parser.add_argument('password')
-parser.add_argument('email')
-
+accountParser = reqparse.RequestParser()
+accountParser.add_argument('username')
+accountParser.add_argument('password')
+accountParser.add_argument('email')
 
 class Register(Resource):
     def post(self):
-        args = parser.parse_args()
+        args = accountParser.parse_args()
         username = args['username']
         password = args['password']
         email = args['email']
