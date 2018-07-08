@@ -107,4 +107,4 @@ venv.bak/
 /.vscode
 
 # SQLite3 databases
-.db
+accounts.db
