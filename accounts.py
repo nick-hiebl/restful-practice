@@ -44,8 +44,6 @@ class HelloWorld(Resource):
 	def get(self):
 		return {'hello': 'world'}
 
-accounts = []
-
 accountParser = reqparse.RequestParser()
 accountParser.add_argument('username')
 accountParser.add_argument('password')
@@ -61,7 +59,6 @@ class Register(Resource):
         new_account = Account(username, password, email)
         print(new_account)
 
-        accounts.append(new_account)
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(Register, '/register')
