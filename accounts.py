@@ -64,16 +64,8 @@ class Register(Resource):
 
         accounts.append(new_account)
 
-class AccountShower(Resource):
-    def get(self):
-        return {"accounts": [
-            a.safe_view() for a in accounts
-        ]}
-
-
 api.add_resource(HelloWorld, '/')
 api.add_resource(Register, '/register')
-api.add_resource(AccountShower, '/accounts')
 
 if __name__ == '__main__':
 	app.run(debug=True)
