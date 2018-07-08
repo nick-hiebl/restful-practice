@@ -12,7 +12,7 @@ class Account:
         conn = sqlite3.connect('accounts.db')
         c = conn.cursor()
 
-        c.execute('''INSERT INTO accounts VALUES ('?', '?', '?'')''',
+        c.execute('''INSERT INTO accounts VALUES ('?', '?', '?')''',
                   self.username, self.password, self.email)
         # Create the table
 
