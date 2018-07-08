@@ -8,6 +8,17 @@ class Account:
         self.password = password
         self.email = email
 
+    def write(self):
+        conn = sqlite3.connect('accounts.db')
+        c = conn.cursor()
+
+        c.execute('''INSERT INTO accounts VALUES (?, ?, ?)''',
+                  self.username, self.password, self.email)
+        # Create the table
+
+        conn.commit()
+        conn.close()
+
     def get_username(self):
         return self.username
 
